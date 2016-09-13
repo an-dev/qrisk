@@ -54,14 +54,12 @@ class QUserInfo(models.Model):
     """
 
     NON_SMOKER   = 'NON-SMOKER'
-    EX_SMOKER    = 'EX-SMOKER'
     LIGHT_SMOKER = 'LIGHT-SMOKER'
     MOD_SMOKER   = 'MOD-SMOKER'
     HEAVY_SMOKER = 'HEAVY-SMOKER'
 
     SMOKER_CHOICES = (
         (NON_SMOKER  , 'NON-SMOKER'),
-        (EX_SMOKER   , 'EX-SMOKER'),
         (LIGHT_SMOKER, 'LIGHT-SMOKER'),
         (MOD_SMOKER  , 'MOD-SMOKER'),
         (HEAVY_SMOKER, 'HEAVY-SMOKER'),
@@ -77,7 +75,7 @@ class QUserInfo(models.Model):
         (T2, 'T2'),
     )
 
-    user            = models.OneToOneField(QUser, primary_key=True, on_delete=models.CASCADE)
+    user            = models.OneToOneField(QUser, primary_key=True, on_delete=models.CASCADE, related_name='info')
     smoking_status  = models.CharField(default=NON_SMOKER, choices=SMOKER_CHOICES, max_length=25)
     diabetes_status = models.CharField(default=NONE, choices=DIABETES_CHOICES, max_length=5)
     heart_attacked_relative = models.BooleanField('Angina or heart attack in a 1st degree relative < 60',
@@ -88,6 +86,7 @@ class QUserInfo(models.Model):
     rheumatoid_arthritis = models.BooleanField(default=False)
     cholesterol_hdl_ratio = models.DecimalField(null=True, decimal_places=1, max_digits=4,
                                                 validators=[MinValueValidator(1.0), MaxValueValidator(12.0)])
-    blood_pressure = models.IntegerField(null=True, validators=[MinValueValidator(70), MaxValueValidator(210)])
+    blood_pressure = models.FloatField(null=True, default=110.0,
+                                       validators=[MinValueValidator(70.0), MaxValueValidator(210.0)])
     height = models.IntegerField(null=True, validators=[MinValueValidator(140), MaxValueValidator(210)])
     weight = models.IntegerField(null=True, validators=[MinValueValidator(40), MaxValueValidator(180)])
