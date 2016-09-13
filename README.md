@@ -25,4 +25,7 @@ A simple API calculator to use the algorithm provided [on this page](https://www
 # TODO
 
 * Add proper tests
-
+* Unnecessary User model creation (?)
+* Better Exception handling
+* Male Calculate method
+* Proper Labels per option

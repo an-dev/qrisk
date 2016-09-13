@@ -35,9 +35,8 @@ def calc_fem(user):
     rati = float(int_from_bool(info.rheumatoid_arthritis))
     smoke_cat = dict(QUserInfo.SMOKER_CHOICES).keys().index(info.smoking_status) + 1
 
-    import pdb; pdb.set_trace()
+    # see pys_risk.c -> calcFemRaw()
+    # not sure what town is meant to be
 
-    a = calcFemRaw(user.age, af, ra, renal, treatedhyp, t1, t2, bmi, ethrisk,
-                   info.heart_attacked_relative, rati, info.blood_pressure, smoke_cat, 1.0)
-
-    return a
+    return calcFemRaw(user.age, af, ra, renal, treatedhyp, t1, t2, bmi, ethrisk,
+                      info.heart_attacked_relative, rati, info.blood_pressure, smoke_cat, 1.0)
