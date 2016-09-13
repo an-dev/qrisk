@@ -5,3 +5,4 @@
 *.pyc
 */*.pyc
 QRISK2-2015-lgpl-source/*
+build/
